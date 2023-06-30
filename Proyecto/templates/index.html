@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USAC-CINEMA</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/carrusel.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary"  id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('inicio')}}" class="btn btn-outline-danger">Catálogo</a>
+                <a href="{{url_for('inicio')}}" class="btn btn-outline-light">Iniciar sesión</a>
+                <a href="{{url_for('inicio')}}" class="btn btn-outline-secondary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div id="conteItemsCarrusel">
+    {% for pelicula in lista_carrusel %}
+    <div class="itemCarrusel" id="itemCarrusel-{{pelicula.id}}">
+        <div class="tarjetaCarrusel" id="tarjetaCarrusel-{{pelicula.id}}">
+            <img src="{{pelicula.imagen}}" alt="Imagen - {{pelicula.titulo}}">
+        </div>
+        <div class="flechasCarrusel">
+            {% if pelicula.id == 1 %}
+            <a href="#itemCarrusel-10"><i class="fa-solid fa-circle-arrow-left"></i></a>
+            <a href="#itemCarrusel-{{pelicula.id + 1}}"><i class="fa-solid fa-circle-arrow-right"></i></a>
+            {% elif pelicula.id == 10 %}
+            <a href="#itemCarrusel-{{pelicula.id - 1}}"><i class="fa-solid fa-circle-arrow-left"></i></a>
+            <a href="#itemCarrusel-1"><i class="fa-solid fa-circle-arrow-right"></i></a>
+            {% else %}
+            <a href="#itemCarrusel-{{pelicula.id - 1}}"><i class="fa-solid fa-circle-arrow-left"></i></a>
+            <a href="#itemCarrusel-{{pelicula.id + 1}}"><i class="fa-solid fa-circle-arrow-right"></i></a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div id="contePuntos">
+    {% for pelicula in lista_carrusel %}
+    <a href="#itemCarrusel-{{pelicula.id}}"><i class="fa-regular fa-circle"></i></a>
+    {% endfor %}
+</div>
+</body>
+</html>

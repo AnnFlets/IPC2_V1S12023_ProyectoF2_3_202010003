@@ -1,0 +1,57 @@
+#barra_navegacion{
+    background-color: black;
+    color: white;
+}
+#botones_navegacion{
+    display: flex;
+    justify-content: right;
+}
+#botones_arriba_tabla{
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+.btn{
+    margin: 0px 15px;
+}
+#boton_formulario{
+    margin: 20px 0;
+}
+#login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+#formulario{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    text-align: center;
+    padding: 40px 45px;
+    width: 400px;
+    box-shadow: 0 5px 10px rgba(71, 3, 6, 0.7)
+}
+.campo{
+    margin-bottom: 40px;
+}
+.fa-solid{
+    font-size: 20px;
+    color: #EC0000;
+    margin-right: 10px;
+}
+.input{
+    outline: none;
+    border: none;
+    color: black;
+    border-bottom: solid 1px gray;
+    width: 85%;
+    padding: 0 5px;
+    font-size: 18px;
+}
+.input::placeholder{
+    color: #B2B2B2;
+}
+.card{
+    padding: 50px;
+}

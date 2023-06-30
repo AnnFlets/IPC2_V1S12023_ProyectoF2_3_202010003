@@ -1,0 +1,107 @@
+<categorias>
+    <categoria>
+        <nombre>Accion</nombre>
+        <peliculas>
+            <pelicula>
+                <titulo>Avengers: Endgame</titulo>
+                <director>Joe Russo, Anthony Russo</director>
+                <anio>2019</anio>
+                <fecha>2023-06-05</fecha>
+                <hora>18:30</hora>
+                <imagen>https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg</imagen>
+                <precio>42</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>John Wick</titulo>
+                <director>Chad Stahelski</director>
+                <anio>2014</anio>
+                <fecha>2023-06-06</fecha>
+                <hora>20:00</hora>
+                <imagen>https://m.media-amazon.com/images/I/71WiYBT2QsL._AC_UF894,1000_QL80_.jpg</imagen>
+                <precio>45</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>Mision Imposible: Fallout</titulo>
+                <director>Christopher McQuarrie</director>
+                <anio>2018</anio>
+                <fecha>2023-06-07</fecha>
+                <hora>19:15</hora>
+                <imagen>https://pics.filmaffinity.com/Misiaon_imposible_Fallout-180739766-mmed.jpg</imagen>
+                <precio>55</precio>
+            </pelicula>
+        </peliculas>
+    </categoria>
+    <categoria>
+        <nombre>Comedia</nombre>
+        <peliculas>
+            <pelicula>
+                <titulo>Deadpool</titulo>
+                <director>Tim Miller</director>
+                <anio>2016</anio>
+                <fecha>2023-06-05</fecha>
+                <hora>20:30</hora>
+                <imagen>https://upload.wikimedia.org/wikipedia/en/2/23/Deadpool_%282016_poster%29.png</imagen>
+                <precio>65</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>Superbad</titulo>
+                <director>Greg Mottola</director>
+                <anio>2007</anio>
+                <fecha>2023-06-06</fecha>
+                <hora>21:00</hora>
+                <imagen>https://m.media-amazon.com/images/M/MV5BY2VkMDg4ZTYtN2M3Yy00NWZiLWE2ODEtZjU5MjZkYWNkNGIzXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg</imagen>
+                <precio>44</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>Bridesmaids</titulo>
+                <director>Paul Feig</director>
+                <anio>2011</anio>
+                <fecha>2023-06-07</fecha>
+                <hora>20:15</hora>
+                <imagen>https://m.media-amazon.com/images/M/MV5BMjAyOTMyMzUxNl5BMl5BanBnXkFtZTcwODI4MzE0NA@@._V1_.jpg</imagen>
+                <precio>42</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>¿Y donde estan las rubias?</titulo>
+                <director>Keenen Ivory Wayans</director>
+                <anio>2004</anio>
+                <fecha>2023-06-28</fecha>
+                <hora>18:40</hora>
+                <imagen>https://images-na.ssl-images-amazon.com/images/S/pv-target-images/28b0ecf243509687008d95b3e1a43219630723a8eaf50f7234b05885543e836e._RI_TTW_.jpg</imagen>
+                <precio>56</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>El diablo viste a la moda</titulo>
+                <director>David Frankel</director>
+                <anio>2006</anio>
+                <fecha>2023-06-27</fecha>
+                <hora>21:00</hora>
+                <imagen>https://m.media-amazon.com/images/I/61TmEB+UwEL._AC_UF894,1000_QL80_.jpg</imagen>
+                <precio>60</precio>
+            </pelicula>
+            <pelicula>
+                <titulo>Chicas pesadas</titulo>
+                <director>Mark Waters</director>
+                <anio>2004</anio>
+                <fecha>2023-06-29</fecha>
+                <hora>14:20</hora>
+                <imagen>https://m.media-amazon.com/images/M/MV5BMjE1MDQ4MjI1OV5BMl5BanBnXkFtZTcwNzcwODAzMw@@._V1_FMjpg_UX1000_.jpg</imagen>
+                <precio>55</precio>
+            </pelicula>
+        </peliculas>
+    </categoria>
+    <categoria>
+        <nombre>Terror</nombre>
+        <peliculas>
+            <pelicula>
+                <titulo>El teléfono negro</titulo>
+                <director>Scott Derrickson</director>
+                <anio>2021</anio>
+                <fecha>2023-06-16</fecha>
+                <hora>20:50</hora>
+                <imagen>https://dx35vtwkllhj9.cloudfront.net/universalstudios/the-black-phone/images/regions/ar/onesheet.jpg</imagen>
+                <precio>43</precio>
+            </pelicula>
+        </peliculas>
+    </categoria>
+</categorias>
