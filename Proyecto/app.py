@@ -258,7 +258,7 @@ def agregar_usuario():
         contrasena = request.form['contrasena']
         rol = request.form['rol']
         if not lista_usuarios.verificar_duplicado(telefono, correo):
-            usuario_creado = Usuario(nombre, apellido, telefono, correo, contrasena, "cliente")
+            usuario_creado = Usuario(nombre, apellido, telefono, correo, contrasena, rol)
             lista_usuarios.agregar_usuario(usuario_creado)
         return redirect(url_for('menu_usuarios'))
     return render_template("/usuarios/agregar_usuario.html")
