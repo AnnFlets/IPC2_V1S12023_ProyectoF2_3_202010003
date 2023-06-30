@@ -206,6 +206,12 @@ def ingresar_datos_facturacion():
         else:
             tarjeta = lista_tarjetas.devolver_tarjeta(int(pago))
             pago = str(tarjeta.get_numero())
+        if nombre == "":
+            nombre = "-"
+        if nit == "":
+            nit = "CF"
+        if direccion == "":
+            direccion = "-"
         factura = Factura(session['correo'], session['telefono'], nombre, nit, direccion, pago)
         lista_facturas.agregar_factura(factura)
         pelicula = lista_peliculas.devolver_pelicula(session['CB_id_pelicula'])
