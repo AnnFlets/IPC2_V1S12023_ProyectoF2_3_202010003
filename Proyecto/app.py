@@ -223,6 +223,7 @@ def ingresar_datos_facturacion():
             asientos_sala.remove(boleto_elegido)
         sala.set_asientos_disponibles(len(asientos_sala))
         factura.set_total(session['CB_total'])
+        boletos.clear()
         return redirect(url_for('menu_cliente'))
     return render_template('/comprar/facturacion.html', lista_tarjetas = lista_tarjetas, total = session['CB_total'])
 
