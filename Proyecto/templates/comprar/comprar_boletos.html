@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprar boletos</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <style>
+        .botones_navegacion{
+            display: flex;
+            justify-content: right;
+        }
+        h1{
+            margin-top: 50px;
+            font-size: 40px;
+        }
+        form{
+            margin-top: 50px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        #contenedor_boletos{
+            margin-top: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        select{
+            width: 300px;
+            font-size: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .card{
+            border-radius: 5px;
+            background-color: #2C2C2C;
+            color: white;
+            justify-content: center;
+            width: 80%;
+            margin: 30px auto;
+            height: 300px;
+            text-align: center;
+            padding: 0px;
+        }
+        .pelicula{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .imagen{
+            display: flex;
+            height: 100%;
+            width: 250px;
+            justify-content: center;
+        }
+        img{
+            border-radius: 5px;
+            width: 100%;
+            height: 100%;
+        }
+        .contenedor_info{
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+            width: 55%;
+        }
+        .info_pelicula{
+            display: block;
+            text-align: left;
+            color: #CCCCCC;
+            font-size: 15px;
+            height: 100%;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div class="botones_navegacion">
+                <a href="{{url_for('menu_cliente')}}" class="btn btn-outline-primary">Menú cliente</a>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<h1 class="text-center">COMPRAR BOLETOS</h1>
+<h3 class="text-center" style="color: gray">PASO 1</h3>
+<div class="card card-body">
+    <div class="pelicula">
+        <div class="imagen">
+            <img src="{{pelicula.imagen}}" alt="Imagen - {{pelicula.titulo}}">
+        </div>
+        <div class="contenedor_info">
+            <div class="info_pelicula">
+                <p><b>Título: </b> {{pelicula.titulo}}</p>
+                <p><b>Director: </b> {{pelicula.director}}</p>
+                <p><b>Año: </b>{{pelicula.anio}}</p>
+                <p><b>Categoría: </b> {{pelicula.categoria}}</p>
+                <p><b>Fecha y hora: </b>{{pelicula.fecha}} {{pelicula.hora}}</p>
+                <p><b>Precio: </b>{{pelicula.precio}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 150px;">
+    <p style="color:red; font-size: 18px;"><b>
+        1. ELIJA LA SALA Y PULSE EL BOTÓN SELECCIONAR.
+        <br/>
+        2. INGRESE LA CANTIDAD DE BOLETOS A COMPRAR Y PULSE EL BOTÓN SELECCIONAR.
+        <br/>
+        3. PULSE EL BOTÓN SIGUIENTE.
+    </b></p>
+</div>
+<form method="POST" style="display: block;">
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="form-group" style="margin-right: 40px;">
+            <label for="sala"><b>Número de sala</b></label>
+            <select name="sala" class="form-control" style="width: 300px; font-size: 16px;">
+                <option disabled="">Selecciona una opción</option>
+                {% for sala in lista_salas %}
+                {% if sala.numero == sala_elegida.numero%}
+                <option value="{{sala.numero}}" selected>{{sala.numero}}</option>
+                {% else %}
+                <option value="{{sala.numero}}">{{sala.numero}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">SELECCIONAR</button>
+        </div>
+    </div>
+    <br/>
+    <div style="display: flex; justify-content: center;">
+        {% if sala_elegida != 'nada' %}
+        <div style="display: block;">
+            <h2>Cine: {{sala_elegida.cine}}</h2>
+            <h2>Asientos: {{sala_elegida.asientos_disponibles}}</h2>
+        </div>
+        {% else %}
+        <div style="display: block;">
+            <h2>Cine: -</h2>
+            <h2>Asientos disponibles: -</h2>
+        </div>
+        {% endif %}
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group" style="display: flex; justify-content: center; align-items: center; font-size: 15px;">
+        <div>
+            <label for="num_boletos" style="margin-right: 30px;"><b>Número de boletos</b></label>
+            <input type="number" name="num_boletos" value="{{cant_boletos}}" required>
+        </div>
+    </div>
+</form>
+<br/>
+<div class="text-center" style="display: flex; justify-content: center;">
+    {% if sala_elegida.asientos_disponibles == 0 %}
+    <h3 style="color:red; font-size: 30px;"> SALA LLENA</h3>
+    {% else %}
+    <a href="{{url_for('elegir_asientos')}}" class="btn btn-primary">SIGUIENTE</a>
+    {% endif %}
+</div>
+<br/>
+</body>
+</html>

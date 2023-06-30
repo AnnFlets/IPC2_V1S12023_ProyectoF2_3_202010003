@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <style>
+        body{
+            background: #0f0c29;
+            background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('inicio')}}" class="btn btn-outline-warning">Inicio</a>
+                <a href="{{url_for('ver_peliculas')}}" class="btn btn-outline-danger">Catálogo</a>
+                <a href="{{url_for('login')}}" class="btn btn-outline-light">Iniciar sesión</a>
+                <a href="{{url_for('registro')}}" class="btn btn-outline-secondary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body">
+                <h1 class="text-center">Registrar usuario</h1>
+                <br/>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="nombre"><b>Nombre</b></label>
+                        <input type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="apellido"><b>Apellido</b></label>
+                        <input type="text" name="apellido" placeholder="Apellido" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="telefono"><b>Teléfono</b></label>
+                        <input type="number" name="telefono" placeholder="Teléfono" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="correo"><b>Correo</b></label>
+                        <input type="email" name="correo" placeholder="Correo" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="contrasena"><b>Contraseña</b></label>
+                        <input type="password" name="contrasena" placeholder="Contaseña" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" id="boton_formulario">REGISTRAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

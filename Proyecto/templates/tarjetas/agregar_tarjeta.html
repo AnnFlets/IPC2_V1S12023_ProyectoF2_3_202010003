@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear tarjeta</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <style>
+        body{
+            background: #FFA17F;
+            background: -webkit-linear-gradient(to right, #00223E, #FFA17F);
+            background: linear-gradient(to right, #00223E, #FFA17F);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('menu_admin')}}" class="btn btn-outline-primary">Menú administrador</a>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body">
+                <h1 class="text-center">CREAR TARJETA</h1>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="numero"><b>Número</b></label>
+                        <input type="number" name="numero" placeholder="Número" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="titular"><b>Titular</b></label>
+                        <input type="text" name="titular" placeholder="Titular" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="fecha_exp"><b>Fecha de expiración</b></label>
+                        <input type="text" name="fecha_exp" placeholder="Fecha de expiración" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="tipo"><b>Tipo</b></label>
+                        <select name="tipo" class="form-control">
+                            <option disabled="">Selecciona una opción</option>
+                            <option value="Credito" selected>Credito</option>
+                            <option value="Debito">Debito</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" id="boton_formulario">CREAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

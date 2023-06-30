@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background: #c31432;
+            background: -webkit-linear-gradient(to right, #240b36, #c31432);
+            background: linear-gradient(to right, #240b36, #c31432);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('inicio')}}" class="btn btn-outline-warning">Inicio</a>
+                <a href="{{url_for('ver_peliculas')}}" class="btn btn-outline-danger">Catálogo</a>
+                <a href="{{url_for('login')}}" class="btn btn-outline-light">Iniciar sesión</a>
+                <a href="{{url_for('registro')}}" class="btn btn-outline-secondary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div id="login">
+    <form method="POST" id="formulario">
+        <h1 class="campo">Iniciar sesión</h1>
+        <br/>
+        <div class="campo">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" name="correo" placeholder="Correo" class="input">
+        </div>
+        <div class="campo">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" name="contrasena" placeholder="Contraseña" class="input">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-danger">LOGIN</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

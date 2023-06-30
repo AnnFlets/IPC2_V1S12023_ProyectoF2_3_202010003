@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprar boletos</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <style>
+        body{
+            background: #4CA1AF;
+            background: -webkit-linear-gradient(to top, #C4E0E5, #4CA1AF);
+            background: linear-gradient(to bottom, #C4E0E5, #4CA1AF);
+        }
+        .botones_navegacion{
+            display: flex;
+            justify-content: right;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div class="botones_navegacion">
+                <a href="{{url_for('menu_cliente')}}" class="btn btn-outline-primary">Menú cliente</a>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body">
+                <h1 class="text-center" style="margin-bottom: 30px;">DATOS DE FACTURACIÓN</h1>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="pago"><b>Método de pago</b></label>
+                        <select name="pago" class="form-control">
+                            <option disabled="">Selecciona una opción</option>
+                            <option value="0" selected>Efectivo</option>
+                            {% for tarjeta in lista_tarjetas %}
+                            <option value="{{tarjeta.id}}">{{tarjeta.numero}} - {{tarjeta.tipo}} - {{tarjeta.titular}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="color:red; font-size: 18px; margin-top: 50px;"><b>DEJE VACÍOS LOS CAMPOS PARA FACTURA CF</b></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre"><b>Nombre</b></label>
+                        <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="nit"><b>NIT</b></label>
+                        <input type="text" name="nit" placeholder="NIT" class="form-control">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="direccion"><b>Dirección</b></label>
+                        <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                    </div>
+                    <br/>
+                    <h3>Total: Q.{{total}}</h3>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" id="boton_formulario">COMPRAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

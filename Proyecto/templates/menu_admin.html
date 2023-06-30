@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú administrador</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        .card{
+            margin-left: 10px;
+            margin-right: 10px;
+            justify-content: center;
+            width: 275px;
+            height: 100%;
+            text-align: center;
+        }
+        .fa-solid{
+            color:white;
+            font-size: 90px;
+        }
+        p{
+            color: white;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        #usuarios{
+            background: #ED4264;
+            background: -webkit-linear-gradient(to top, #FFEDBC, #ED4264);
+            background: linear-gradient(to bottom, #FFEDBC, #ED4264);
+        }
+        #peliculas{
+            background: #ff6e7f;
+            background: -webkit-linear-gradient(to top, #bfe9ff, #ff6e7f);
+            background: linear-gradient(to bottom, #bfe9ff, #ff6e7f);
+        }
+        #salas{
+            background: #2BC0E4;
+            background: -webkit-linear-gradient(to top, #EAECC6, #2BC0E4);
+            background: linear-gradient(to bottom, #EAECC6, #2BC0E4);
+        }
+        #boletos{
+            background: #43C6AC;
+            background: -webkit-linear-gradient(to top, #F8FFAE, #43C6AC);
+            background: linear-gradient(to bottom, #F8FFAE, #43C6AC);
+        }
+        #tarjetas{
+            background: #A770EF;
+            background: -webkit-linear-gradient(to top, #FDB99B, #CF8BF3, #A770EF);
+            background: linear-gradient(to bottom, #FDB99B, #CF8BF3, #A770EF);
+        }
+        #menu_admin{
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" style="background-color: black; color: white;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div style="display: flex; justify-content: right;">
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<br/>
+<h1 class="text-center">MENÚ ADMINISTRADOR</h1>
+<h3 class="text-center" style="color: gray">Bienvenido {{nombre}} {{apellido}}</h3>
+<br/>
+<div id="menu_admin">
+    <a href="{{url_for('menu_usuarios')}}">
+        <div class="card card-body" id="usuarios">
+            <i class="fa-solid fa-user"></i>
+            <p>Gestión usuarios</p>
+        </div>
+    </a>
+    <a href="{{url_for('menu_peliculas')}}">
+        <div class="card card-body" id="peliculas">
+            <i class="fa-solid fa-film"></i>
+            <p>Gestión películas</p>
+        </div>
+    </a>
+    <a href="{{url_for('menu_salas')}}">
+        <div class="card card-body" id="salas">
+            <i class="fa-solid fa-display"></i>
+            <p>Gestión salas</p>
+        </div>
+    </a>
+    <a href="{{url_for('menu_boletos')}}">
+        <div class="card card-body" id="boletos">
+            <i class="fa-solid fa-ticket"></i>
+            <p>Gestión boletos</p>
+        </div>
+    </a>
+    <a href="{{url_for('menu_tarjetas')}}">
+        <div class="card card-body" id="tarjetas">
+            <i class="fa-solid fa-credit-card"></i>
+            <p>Gestión tarjetas</p>
+        </div>
+    </a>
+</div>
+</body>
+</html>

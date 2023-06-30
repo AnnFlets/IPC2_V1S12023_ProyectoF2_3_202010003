@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear película</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <style>
+        body{
+            background: #CC95C0;
+            background: -webkit-linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);
+            background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('menu_admin')}}" class="btn btn-outline-primary">Menú administrador</a>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body">
+                <h1 class="text-center">CREAR PELÍCULA</h1>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="titulo"><b>Título</b></label>
+                        <input type="text" name="titulo" placeholder="Título" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="director"><b>Director</b></label>
+                        <input type="text" name="director" placeholder="Director" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="anio"><b>Año</b></label>
+                        <input type="number" name="anio" placeholder="Año" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="categoria"><b>Categoría</b></label>
+                        <input type="text" name="categoria" placeholder="Categoría" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="fecha"><b>Fecha</b></label>
+                        <input type="date" name="fecha" placeholder="Fecha" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="hora"><b>Hora</b></label>
+                        <input type="time" name="hora" placeholder="Hora" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="imagen"><b>Imagen</b></label>
+                        <input type="text" name="imagen" placeholder="Imagen" class="form-control" required>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="precio"><b>Precio</b></label>
+                        <input type="number" name="precio" placeholder="Precio" class="form-control" required>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" id="boton_formulario">CREAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

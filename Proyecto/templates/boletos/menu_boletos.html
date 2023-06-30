@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de boletos</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary"  id="barra_navegacion">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div id="botones_navegacion">
+                <a href="{{url_for('menu_admin')}}" class="btn btn-outline-primary">Menú administrador</a>
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <br/>
+    <h1 class="text-center" style="margin: 40px 0px;">GESTIÓN DE BOLETOS</h1>
+    <div class="row">
+        <div class="col-md-12">
+            {% for factura in lista_facturas %}
+            <table border="solid 1px" style="width: 100%; background-color: #D3D3D3;">
+                <thead>
+                <tr class="text-center">
+                    <th colspan="10">No. Factura: {{factura.id}} | Nombre: {{factura.nombre}} | NIT: {{factura.nit}} | Método de pago: {{factura.pago}} | Total: Q.{{factura.total}}</th>
+                </tr>
+                </thead>
+            </table>
+            <table class="table table-striped table-bordered bg-white table-sm">
+                <thead>
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Número</th>
+                    <th>Película</th>
+                    <th>Cine</th>
+                    <th>Sala</th>
+                    <th>Asiento</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for boleto in factura.boletos %}
+                <tr class="text-center">
+                    <td>{{boleto.id}}</td>
+                    <td>{{boleto.numero}}</td>
+                    <td>{{boleto.pelicula}}</td>
+                    <td>{{boleto.cine}}</td>
+                    <td>{{boleto.sala}}</td>
+                    <td>{{boleto.asiento}}</td>
+                    <td>{{boleto.fecha}}</td>
+                    <td>{{boleto.hora}}</td>
+                    <td>{{boleto.precio}}</td>
+                    <td>{{boleto.estado}}</td>
+                    <td>
+                        {% if boleto.estado == 'activo' %}
+                        <a href="{{url_for('cambiar_estado_boleto', id = boleto.id, estado = boleto.estado)}}" class="btn btn-danger">Cancelar</a>
+                        {% else %}
+                        <a href="{{url_for('cambiar_estado_boleto', id = boleto.id, estado = boleto.estado)}}" class="btn btn-success">Activar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br/>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

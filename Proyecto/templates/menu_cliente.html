@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú cliente</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/estilos.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        .card{
+            margin-left: 10px;
+            margin-right: 10px;
+            justify-content: center;
+            width: 275px;
+            height: 100%;
+            text-align: center;
+        }
+        .fa-solid{
+            color:white;
+            font-size: 90px;
+        }
+        p{
+            color: white;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        #cartelera{
+            background: #ED4264;
+            background: -webkit-linear-gradient(to top, #FFEDBC, #ED4264);
+            background: linear-gradient(to bottom, #FFEDBC, #ED4264);
+        }
+        #favoritas{
+            background: #ff6e7f;
+            background: -webkit-linear-gradient(to top, #bfe9ff, #ff6e7f);
+            background: linear-gradient(to bottom, #bfe9ff, #ff6e7f);
+        }
+        #comprar{
+            background: #2BC0E4;
+            background: -webkit-linear-gradient(to top, #EAECC6, #2BC0E4);
+            background: linear-gradient(to bottom, #EAECC6, #2BC0E4);
+        }
+        #historial{
+            background: #43C6AC;
+            background: -webkit-linear-gradient(to top, #F8FFAE, #43C6AC);
+            background: linear-gradient(to bottom, #F8FFAE, #43C6AC);
+        }
+        #menu_cliente{
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar bg-body-tertiary" style="background-color: black; color: white;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">USAC-CINEMA</span>
+            <div style="display: flex; justify-content: right;">
+                <a href="{{url_for('logout')}}" class="btn btn-outline-light">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<br/>
+<br/>
+<h1 class="text-center">MENÚ CLIENTE</h1>
+<h3 class="text-center" style="color: gray">Bienvenido {{nombre}} {{apellido}}</h3>
+<br/>
+<div id="menu_cliente">
+    <a href="{{url_for('ver_peliculas')}}">
+        <div class="card card-body" id="cartelera">
+            <i class="fa-solid fa-film"></i>
+            <p>Catálogo</p>
+        </div>
+    </a>
+    <a href="{{url_for('ver_favoritas')}}">
+        <div class="card card-body" id="favoritas">
+            <i class="fa-solid fa-star"></i>
+            <p>Películas favoritas</p>
+        </div>
+    </a>
+    <a href="{{url_for('ver_peliculas')}}">
+        <div class="card card-body" id="comprar">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>Comprar boletos</p>
+        </div>
+    </a>
+    <a href="{{url_for('ver_historial')}}">
+        <div class="card card-body" id="historial">
+            <i class="fa-solid fa-ticket"></i>
+            <p>Historial compras</p>
+        </div>
+    </a>
+</div>
+</body>
+</html>
