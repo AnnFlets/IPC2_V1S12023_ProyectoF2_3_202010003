@@ -435,7 +435,10 @@ def menu_boletos():
 def cambiar_estado_boleto(id, estado):
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
-    lista_facturas.verificar_cambio_estado_boleto(id, 'cancelado')
+    if estado == 'activo':
+        lista_facturas.verificar_cambio_estado_boleto(id, 'cancelado')
+    else:
+        lista_facturas.verificar_cambio_estado_boleto(id, 'activo')
     return redirect(url_for('menu_boletos'))
 
 # *------ GESTIÓN DE TARJETAS ------*
