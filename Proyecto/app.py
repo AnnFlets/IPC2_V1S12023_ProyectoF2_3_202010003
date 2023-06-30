@@ -23,7 +23,9 @@ lista_peliculas = ListaPeliculas()
 lista_peliculas.cargar_peliculas()
 # PELÍCULAS DEL CARRUSEL
 lista_carrusel = ListaPeliculas()
-lista_carrusel.cargar_peliculas()
+# Cargar 10 películas
+for i in range(10):
+    lista_carrusel.agregar_pelicula(lista_peliculas.devolver_pelicula(i + 1))
 # SALAS
 lista_salas = ListaSalas()
 lista_salas.cargar_salas()
