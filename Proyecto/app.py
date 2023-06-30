@@ -12,6 +12,7 @@ from boletos.boleto import Boleto
 from tarjetas.lista_doblemente_enlazada import ListaTarjetas
 from tarjetas.nodo import Nodo
 from tarjetas.tarjeta import Tarjeta
+import requests
 
 app = Flask(__name__)
 # Llave secreta para almacenar los datos de la sesión iniciada
@@ -269,6 +270,12 @@ def cargar_usuarios():
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
     lista_usuarios.cargar_usuarios()
+    usuarios_api = requests.get("http://127.0.0.1:5007/getUsuarios").json()
+    for usuario in usuarios_api['usuario']:
+        if not lista_usuarios.verificar_duplicado(int(usuario['telefono']), usuario['correo']):
+            usuario_nuevo = Usuario(usuario['nombre'], usuario['apellido'], int(usuario['telefono']), usuario['correo'],
+                                    usuario['contrasena'], usuario['rol'])
+            lista_usuarios.agregar_usuario(usuario_nuevo)
     return redirect(url_for('menu_usuarios'))
 
 @app.route('/admin/menu_usuarios/usuario/editar/<int:id>', methods=['GET', 'POST'])
@@ -333,6 +340,16 @@ def cargar_peliculas():
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
     lista_peliculas.cargar_peliculas()
+    peliculas_api = requests.get("http://127.0.0.1:5007/getPeliculas").json()
+    for categoria in peliculas_api['categoria']:
+        categoria_nombre = categoria['nombre']
+        peliculas_categoria = categoria['peliculas']
+        for peli in peliculas_categoria['pelicula']:
+            if not lista_peliculas.verificar_duplicado(categoria_nombre, peli['titulo'], peli['director'],
+                                                       int(peli['anio']), peli['fecha'], peli['hora']):
+                peli_nueva = Pelicula(categoria_nombre, peli['titulo'], peli['director'], int(peli['anio']),
+                                      peli['fecha'], peli['hora'], peli['imagen'], int(peli['precio']))
+                lista_peliculas.agregar_pelicula(peli_nueva)
     return redirect(url_for('menu_peliculas'))
 
 @app.route('/admin/menu_peliculas/pelicula/editar/<int:id>', methods=['GET', 'POST'])
@@ -394,6 +411,14 @@ def cargar_salas():
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
     lista_salas.cargar_salas()
+    salas_api = requests.get("http://127.0.0.1:5007/getSalas").json()
+    for cine in salas_api['cine']:
+        nombre_cine = cine['nombre']
+        salas_cine = cine['salas']
+        for sala in salas_cine['sala']:
+            if not lista_salas.verificar_duplicado(sala['numero']):
+                sala_nueva = Sala(nombre_cine, sala['numero'], int(sala['asientos']))
+                lista_salas.agregar_sala(sala_nueva)
     return redirect(url_for('menu_salas'))
 
 @app.route('/admin/menu_salas/sala/editar/<int:id>', methods=['GET', 'POST'])
@@ -469,6 +494,12 @@ def cargar_tarjetas():
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
     lista_tarjetas.cargar_tarjetas()
+    tarjetas_api = requests.get("http://127.0.0.1:5007/getTarjetas").json()
+    for tarjeta in tarjetas_api['tarjeta']:
+        if not lista_tarjetas.verificar_duplicado(int(tarjeta['numero'])):
+            tarjeta_nueva = Tarjeta(tarjeta['tipo'], int(tarjeta['numero']), tarjeta['titular'],
+                                    tarjeta['fecha_expiracion'])
+            lista_tarjetas.agregar_tarjeta(tarjeta_nueva)
     return redirect(url_for('menu_tarjetas'))
 
 @app.route('/admin/menu_tarjetas/tarjeta/editar/<int:id>', methods=['GET', 'POST'])
