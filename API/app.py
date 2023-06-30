@@ -4,6 +4,7 @@ import json
 
 app = Flask(__name__)
 
+
 @app.route('/getUsuarios', methods=['GET'])
 def getUsuarios():
     try:
@@ -41,6 +42,7 @@ def getUsuarios():
         return jsonify(retorno)
     except:
         return {"mensaje": "Error interno en el servidor", "status": 500}
+
 
 @app.route('/getPeliculas', methods=['GET'])
 def getPeliculas():
@@ -97,38 +99,42 @@ def getPeliculas():
     except:
         return {"mensaje": "Error interno en el servidor", "status": 500}
 
+
 @app.route('/getSalas', methods=['GET'])
 def getSalas():
     try:
         if request.method == 'GET':
             retorno = {
-                "cine": {
-                    "nombre": "Cine Suzhou",
-                    "salas": {
-                        "sala": [
-                            {
-                                "numero": "#USACIPC2_202212333_101",
-                                "asientos": "60"
-                            },
+                "cine": [
+                    {
+                        "nombre": "Cine Suzhou",
+                        "salas": {
+                            "sala": [
+                                {
+                                    "numero": "#USACIPC2_202212333_101",
+                                    "asientos": "60"
+                                },
 
-                            {
-                                "numero": "#USACIPC2_202212333_102",
-                                "asientos": "25"
-                            },
+                                {
+                                    "numero": "#USACIPC2_202212333_102",
+                                    "asientos": "25"
+                                },
 
-                            {
-                                "numero": "#USACIPC2_202212333_103",
-                                "asientos": "40"
-                            }
-                        ]
+                                {
+                                    "numero": "#USACIPC2_202212333_103",
+                                    "asientos": "40"
+                                }
+                            ]
+                        }
                     }
-                }
+                ]
             }
         else:
             retorno = {'mensaje': 'Error en la petición, método incorrecto'}
         return jsonify(retorno)
     except:
         return {"mensaje": "Error interno en el servidor", "status": 500}
+
 
 @app.route('/getTarjetas', methods=['GET'])
 def getTarjetas():
@@ -161,6 +167,7 @@ def getTarjetas():
         return jsonify(retorno)
     except:
         return {"mensaje": "Error interno en el servidor", "status": 500}
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5007)
