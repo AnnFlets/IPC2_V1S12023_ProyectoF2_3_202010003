@@ -231,3 +231,267 @@ def ver_historial():
     if not verificar_usuario_activo():
         return redirect(url_for('inicio'))
     return render_template('/boletos/historial.html', lista_facturas = lista_facturas, correo = session['correo'], telefono = session['telefono'])
+
+# ***------------------ MENÚ ADMINISTRADOR ------------------***
+@app.route('/admin')
+def menu_admin():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    return render_template("menu_admin.html", nombre = session['nombre'], apellido = session['apellido'])
+
+# *------ GESTIÓN DE USUARIOS ------*
+@app.route('/admin/menu_usuarios')
+def menu_usuarios():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    return render_template("/usuarios/menu_usuarios.html", lista_usuarios = lista_usuarios)
+
+@app.route('/admin/menu_usuarios/usuario/agregar', methods=['GET', 'POST'])
+def agregar_usuario():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        telefono = int(request.form['telefono'])
+        correo = request.form['correo']
+        contrasena = request.form['contrasena']
+        rol = request.form['rol']
+        if not lista_usuarios.verificar_duplicado(telefono, correo):
+            usuario_creado = Usuario(nombre, apellido, telefono, correo, contrasena, "cliente")
+            lista_usuarios.agregar_usuario(usuario_creado)
+        return redirect(url_for('menu_usuarios'))
+    return render_template("/usuarios/agregar_usuario.html")
+
+@app.route('/admin/menu_usuarios/usuario/cargar')
+def cargar_usuarios():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_usuarios.cargar_usuarios()
+    return redirect(url_for('menu_usuarios'))
+
+@app.route('/admin/menu_usuarios/usuario/editar/<int:id>', methods=['GET', 'POST'])
+def editar_usuario(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        telefono = int(request.form['telefono'])
+        correo = request.form['correo']
+        contrasena = request.form['contrasena']
+        rol = request.form['rol']
+        if not lista_usuarios.verificar_duplicado_modificacion(id, telefono, correo):
+            usuario_modificado = Usuario(nombre, apellido, telefono, correo, contrasena, rol)
+            lista_usuarios.modificar_usuario(id, usuario_modificado)
+        return redirect(url_for('menu_usuarios'))
+    return render_template("/usuarios/editar_usuario.html", usuario = lista_usuarios.devolver_usuario(id))
+
+@app.route('/admin/menu_usuarios/usuario/eliminar/<int:id>')
+def eliminar_usuario(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_usuarios.eliminar_usuario(id)
+    return redirect(url_for('menu_usuarios'))
+
+@app.route('/admin/menu_usuarios/usuario/guardar')
+def guardar_usuarios():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_usuarios.guardar_usuarios()
+    return redirect(url_for('menu_usuarios'))
+
+# *------ GESTIÓN DE PELÍCULAS ------*
+@app.route('/admin/menu_peliculas')
+def menu_peliculas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    return render_template("/peliculas/menu_peliculas.html", lista_peliculas = lista_peliculas)
+
+@app.route('/admin/menu_peliculas/pelicula/agregar', methods=['GET', 'POST'])
+def agregar_pelicula():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        director = request.form['director']
+        anio = int(request.form['anio'])
+        categoria = request.form['categoria']
+        fecha = str(request.form['fecha'])
+        hora = str(request.form['hora'])
+        imagen = request.form['imagen']
+        precio = int(request.form['precio'])
+        if not lista_peliculas.verificar_duplicado(categoria, titulo, director, anio, fecha, hora):
+            pelicula_creada = Pelicula(categoria, titulo, director, anio, fecha, hora, imagen, precio)
+            lista_peliculas.agregar_pelicula(pelicula_creada)
+        return redirect(url_for('menu_peliculas'))
+    return render_template("/peliculas/agregar_pelicula.html")
+
+@app.route('/admin/menu_peliculas/pelicula/cargar')
+def cargar_peliculas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_peliculas.cargar_peliculas()
+    return redirect(url_for('menu_peliculas'))
+
+@app.route('/admin/menu_peliculas/pelicula/editar/<int:id>', methods=['GET', 'POST'])
+def editar_pelicula(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        director = request.form['director']
+        anio = int(request.form['anio'])
+        categoria = request.form['categoria']
+        fecha = str(request.form['fecha'])
+        hora = str(request.form['hora'])
+        imagen = request.form['imagen']
+        precio = int(request.form['precio'])
+        if not lista_peliculas.verificar_duplicado_modificacion(id, categoria, titulo, director, anio, fecha, hora):
+            pelicula_modificada = Pelicula(categoria, titulo, director, anio, fecha, hora, imagen, precio)
+            lista_peliculas.modificar_pelicula(id, pelicula_modificada)
+        return redirect(url_for('menu_peliculas'))
+    return render_template("/peliculas/editar_pelicula.html", pelicula = lista_peliculas.devolver_pelicula(id))
+
+@app.route('/admin/menu_peliculas/pelicula/eliminar/<int:id>')
+def eliminar_pelicula(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_peliculas.eliminar_pelicula(id)
+    return redirect(url_for('menu_peliculas'))
+
+@app.route('/admin/menu_peliculas/pelicula/guardar')
+def guardar_peliculas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_peliculas.guardar_peliculas()
+    return redirect(url_for('menu_peliculas'))
+
+# *------ GESTIÓN DE SALAS ------*
+@app.route('/admin/menu_salas')
+def menu_salas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    return render_template("/salas/menu_salas.html", lista_salas = lista_salas)
+
+@app.route('/admin/menu_salas/sala/agregar', methods=['GET', 'POST'])
+def agregar_sala():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        numero = request.form['numero']
+        cine = request.form['cine']
+        asientos = int(request.form['asientos'])
+        if not lista_salas.verificar_duplicado(numero):
+            sala_creada = Sala(cine, numero, asientos)
+            lista_salas.agregar_sala(sala_creada)
+        return redirect(url_for('menu_salas'))
+    return render_template("/salas/agregar_sala.html")
+
+@app.route('/admin/menu_salas/sala/cargar')
+def cargar_salas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_salas.cargar_salas()
+    return redirect(url_for('menu_salas'))
+
+@app.route('/admin/menu_salas/sala/editar/<int:id>', methods=['GET', 'POST'])
+def editar_sala(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        numero = request.form['numero']
+        cine = request.form['cine']
+        asientos = int(request.form['asientos'])
+        if not lista_salas.verificar_duplicado_modificacion(id, numero):
+            sala_modificada = Sala(cine, numero, asientos)
+            lista_salas.modificar_sala(id, sala_modificada)
+        return redirect(url_for('menu_salas'))
+    return render_template("/salas/editar_sala.html", sala = lista_salas.devolver_sala(id))
+
+@app.route('/admin/menu_salas/sala/eliminar/<int:id>')
+def eliminar_sala(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_salas.eliminar_sala(id)
+    return redirect(url_for('menu_salas'))
+
+@app.route('/admin/menu_salas/sala/guardar')
+def guardar_salas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_salas.guardar_salas()
+    return redirect(url_for('menu_salas'))
+
+    # *------ GESTIÓN DE BOLETOS ------*
+@app.route('/admin/menu_boletos')
+def menu_boletos():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_facturas.imprimir_boletos_estado("activo")
+    return render_template("/boletos/menu_boletos.html", lista_facturas = lista_facturas)
+
+@app.route('/admin/menu_boletos/boleto/<int:id>/estado/<estado>')
+def cambiar_estado_boleto(id, estado):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_facturas.verificar_cambio_estado_boleto(id, 'cancelado')
+    return redirect(url_for('menu_boletos'))
+
+# *------ GESTIÓN DE TARJETAS ------*
+@app.route('/admin/menu_tarjetas')
+def menu_tarjetas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    return render_template("/tarjetas/menu_tarjetas.html", lista_tarjetas = lista_tarjetas)
+
+@app.route('/admin/menu_tarjetas/tarjeta/agregar', methods=['GET', 'POST'])
+def agregar_tarjeta():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        numero = int(request.form['numero'])
+        titular = request.form['titular']
+        fecha_exp = request.form['fecha_exp']
+        tipo = request.form['tipo']
+        if not lista_tarjetas.verificar_duplicado(numero):
+            tarjeta_creada = Tarjeta(tipo, numero, titular, fecha_exp)
+            lista_tarjetas.agregar_tarjeta(tarjeta_creada)
+        return redirect(url_for('menu_tarjetas'))
+    return render_template("/tarjetas/agregar_tarjeta.html")
+
+@app.route('/admin/menu_tarjetas/tarjeta/cargar')
+def cargar_tarjetas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_tarjetas.cargar_tarjetas()
+    return redirect(url_for('menu_tarjetas'))
+
+@app.route('/admin/menu_tarjetas/tarjeta/editar/<int:id>', methods=['GET', 'POST'])
+def editar_tarjeta(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    if request.method == 'POST':
+        numero = int(request.form['numero'])
+        titular = request.form['titular']
+        fecha_exp = request.form['fecha_exp']
+        tipo = request.form['tipo']
+        if not lista_tarjetas.verificar_duplicado_modificacion(id, numero):
+            tarjeta_modificada = Tarjeta(tipo, numero, titular, fecha_exp)
+            lista_tarjetas.modificar_tarjeta(id, tarjeta_modificada)
+        return redirect(url_for('menu_tarjetas'))
+    return render_template("/tarjetas/editar_tarjeta.html", tarjeta = lista_tarjetas.devolver_tarjeta(id))
+
+@app.route('/admin/menu_tarjetas/tarjeta/eliminar/<int:id>')
+def eliminar_tarjeta(id):
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_tarjetas.eliminar_tarjeta(id)
+    return redirect(url_for('menu_tarjetas'))
+
+@app.route('/admin/menu_tarjetas/tarjeta/guardar')
+def guardar_tarjetas():
+    if not verificar_usuario_activo():
+        return redirect(url_for('inicio'))
+    lista_tarjetas.guardar_tarjetas()
+    return redirect(url_for('menu_tarjetas'))
